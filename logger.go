@@ -39,17 +39,15 @@ func (self *Logger) init() {
 }
 
 func (self *Logger) Println(level int, v ...interface{}) {
-	if self.level < level {
-		return
+	if self.level <= level {
+		self.loggers[level].Println(v)
 	}
-	self.loggers[level].Println(v)
 }
 
 func (self *Logger) Printf(level int, t string, v ...interface{}) {
-	if self.level < level {
-		return
+	if self.level <= level {
+		self.loggers[level].Printf(t, v)
 	}
-	self.loggers[level].Printf(t, v)
 }
 
 func Fatalln(v ...interface{}) {
