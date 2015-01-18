@@ -18,7 +18,7 @@ const (
 var logger Logger
 
 func init() {
-	flag.IntVar(&logger.level, "v", 3, "log level")
+	flag.IntVar(&logger.level, "v", 3, "log levels Fatal,Error,Warn,Info,Debug,Verbose - 0..5")
 	logger.init()
 }
 
