@@ -18,7 +18,7 @@ const (
 var logger Logger
 
 func init() {
-	flag.IntVar(&logger.level, "v", 3, "log levels Fatal,Error,Warn,Info,Debug,Verbose - 0..5")
+	flag.IntVar(&logger.level, "v", 3, "log levels: Fatal,Error,Warn,Info,Debug,Verbose - from 0 to 5")
 	logger.init()
 }
 
@@ -39,13 +39,13 @@ func (self *Logger) init() {
 }
 
 func (self *Logger) Println(level int, v ...interface{}) {
-	if self.level <= level {
+	if level <= self.level {
 		self.loggers[level].Println(v)
 	}
 }
 
 func (self *Logger) Printf(level int, t string, v ...interface{}) {
-	if self.level <= level {
+	if level <= self.level {
 		self.loggers[level].Printf(t, v)
 	}
 }
