@@ -7,12 +7,12 @@ import (
 )
 
 const (
-	FatalLevel = iota
-	ErrorLevel
-	WarnLevel
-	InfoLevel
-	DebugLevel
-	VerboseLevel
+	FATALLV = iota
+	ERRORLV
+	WARNLV
+	INFOLV
+	DEBUGLV
+	VERBOSELV
 )
 
 var logger Logger
@@ -23,77 +23,77 @@ func init() {
 }
 
 type Logger struct {
-	loggers map[int]*log.Logger
+	loggers map[uint]*log.Logger
 	level   int
 }
 
 func (self *Logger) init() {
-	self.loggers = map[int]*log.Logger{
-		FatalLevel:   log.New(os.Stderr, "fatal: ", log.Ldate|log.Ltime),
-		ErrorLevel:   log.New(os.Stderr, "error: ", log.Ldate|log.Ltime),
-		WarnLevel:    log.New(os.Stderr, "warning: ", log.Ldate|log.Ltime),
-		InfoLevel:    log.New(os.Stderr, "info: ", log.Ldate|log.Ltime),
-		DebugLevel:   log.New(os.Stderr, "debug: ", log.Ldate|log.Ltime),
-		VerboseLevel: log.New(os.Stderr, "verbose: ", log.Ldate|log.Ltime),
+	self.loggers = map[uint]*log.Logger{
+		FATALLV:   log.New(os.Stderr, "fatal: ", log.Ldate|log.Ltime),
+		ERRORLV:   log.New(os.Stderr, "error: ", log.Ldate|log.Ltime),
+		WARNLV:    log.New(os.Stderr, "warning: ", log.Ldate|log.Ltime),
+		INFOLV:    log.New(os.Stderr, "info: ", log.Ldate|log.Ltime),
+		DEBUGLV:   log.New(os.Stderr, "debug: ", log.Ldate|log.Ltime),
+		VERBOSELV: log.New(os.Stderr, "verbose: ", log.Ldate|log.Ltime),
 	}
 }
 
-func (self *Logger) Println(level int, v ...interface{}) {
-	if level <= self.level {
-		self.loggers[level].Println(v)
+func (self *Logger) Println(level uint, v ...interface{}) {
+	if level <= uint(self.level) {
+		self.loggers[level].Println(v...)
 	}
 }
 
-func (self *Logger) Printf(level int, t string, v ...interface{}) {
-	if level <= self.level {
-		self.loggers[level].Printf(t, v)
+func (self *Logger) Printf(level uint, t string, v ...interface{}) {
+	if level <= uint(self.level) {
+		self.loggers[level].Printf(t, v...)
 	}
 }
 
 func Fatalln(v ...interface{}) {
-	logger.loggers[FatalLevel].Fatalln(v)
+	logger.loggers[FATALLV].Fatalln(v...)
 }
 
 func Fatalf(tmpl string, v ...interface{}) {
-	logger.loggers[FatalLevel].Fatalf(tmpl, v)
+	logger.loggers[FATALLV].Fatalf(tmpl, v...)
 }
 
 func Infoln(v ...interface{}) {
-	logger.Println(InfoLevel, v)
+	logger.Println(INFOLV, v...)
 }
 
 func Infof(t string, v ...interface{}) {
-	logger.Printf(InfoLevel, t, v)
+	logger.Printf(INFOLV, t, v...)
 }
 
 func Debugln(v ...interface{}) {
-	logger.Println(DebugLevel, v)
+	logger.Println(DEBUGLV, v...)
 }
 
 func Debugf(t string, v ...interface{}) {
-	logger.Printf(DebugLevel, t, v)
+	logger.Printf(DEBUGLV, t, v...)
 }
 
 func Errorln(v ...interface{}) {
-	logger.Println(ErrorLevel, v)
+	logger.Println(ERRORLV, v...)
 }
 
 func Errorf(t string, v ...interface{}) {
-	logger.Printf(ErrorLevel, t, v)
+	logger.Printf(ERRORLV, t, v...)
 }
 
 func Warnln(v ...interface{}) {
-	logger.Println(WarnLevel, v)
+	logger.Println(WARNLV, v...)
 }
 
 func Warnf(t string, v ...interface{}) {
-	logger.Printf(WarnLevel, t, v)
+	logger.Printf(WARNLV, t, v...)
 }
 
 func Verboseln(v ...interface{}) {
-	logger.Println(VerboseLevel, v)
+	logger.Println(VERBOSELV, v...)
 }
 
 func Verbosef(t string, v ...interface{}) {
-	logger.Printf(VerboseLevel, t, v)
+	logger.Printf(VERBOSELV, t, v...)
 }
