@@ -29,12 +29,12 @@ type Logger struct {
 
 func (self *Logger) init() {
 	self.loggers = map[int]*log.Logger{
-		FatalLevel:   log.New(os.Stderr, "fatal: ", log.Ldate|log.Ltime|log.Lshortfile),
-		ErrorLevel:   log.New(os.Stderr, "error: ", log.Ldate|log.Ltime|log.Lshortfile),
-		WarnLevel:    log.New(os.Stderr, "warning: ", log.Ldate|log.Ltime|log.Lshortfile),
-		InfoLevel:    log.New(os.Stderr, "info: ", log.Ldate|log.Ltime|log.Lshortfile),
-		DebugLevel:   log.New(os.Stderr, "debug: ", log.Ldate|log.Ltime|log.Lshortfile),
-		VerboseLevel: log.New(os.Stderr, "verbose: ", log.Ldate|log.Ltime|log.Lshortfile),
+		FatalLevel:   log.New(os.Stderr, "fatal: ", log.Ldate|log.Ltime),
+		ErrorLevel:   log.New(os.Stderr, "error: ", log.Ldate|log.Ltime),
+		WarnLevel:    log.New(os.Stderr, "warning: ", log.Ldate|log.Ltime),
+		InfoLevel:    log.New(os.Stderr, "info: ", log.Ldate|log.Ltime),
+		DebugLevel:   log.New(os.Stderr, "debug: ", log.Ldate|log.Ltime),
+		VerboseLevel: log.New(os.Stderr, "verbose: ", log.Ldate|log.Ltime),
 	}
 }
 
