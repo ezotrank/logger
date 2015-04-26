@@ -38,6 +38,10 @@ func (self *Logger) init() {
 	}
 }
 
+func AvailableForLevel(lvl int) bool {
+    return lvl <= logger.level
+}
+
 func (self *Logger) Println(level uint, v ...interface{}) {
 	if level <= uint(self.level) {
 		self.loggers[level].Println(v...)
