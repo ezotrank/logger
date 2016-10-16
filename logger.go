@@ -54,8 +54,8 @@ func SetLogger(logLevel string, logFile string) {
 	go func() {
 		for sig := range c {
 			mutex.Lock()
-			Log.Printf("[WARN] Go a %v Signal! Reopen logs", sig)
-			Log.SetOutput(initLogFilter(logLevel, logFile))
+			log.Printf("[WARN] Go a %v Signal! Reopen logs", sig)
+			log.SetOutput(initLogFilter(logLevel, logFile))
 			mutex.Unlock()
 		}
 	}()
