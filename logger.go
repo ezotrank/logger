@@ -16,8 +16,10 @@ const (
 	DEFAULT_LOG_LEVEL = "INFO"
 )
 
+type Log logger.Logger
+
 var (
-	log *logger.Logger
+	log *Log
 )
 
 func init() {
