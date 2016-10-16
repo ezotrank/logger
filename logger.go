@@ -17,7 +17,7 @@ const (
 )
 
 var (
-	Log *logger.Logger
+	log *logger.Logger
 )
 
 func init() {
@@ -41,10 +41,14 @@ func initLogFilter(logLevel string, logFile string) io.Writer {
 	return filter
 }
 
+func GetLogger() *logger.Logger {
+	return log
+}
+
 func SetLogger(logLevel string, logFile string) {
 	logLevel = strings.ToUpper(logLevel)
 	mutex := &sync.Mutex{}
-	Log = &logger.Logger{}
+	log = &logger.Logger{}
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGUSR1)
 	go func() {
@@ -55,6 +59,6 @@ func SetLogger(logLevel string, logFile string) {
 			mutex.Unlock()
 		}
 	}()
-	Log.SetFlags(logger.LstdFlags | logger.Lshortfile)
-	Log.SetOutput(initLogFilter(logLevel, logFile))
+	log.SetFlags(logger.LstdFlags | logger.Lshortfile)
+	log.SetOutput(initLogFilter(logLevel, logFile))
 }
